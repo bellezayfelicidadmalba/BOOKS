@@ -1,4 +1,4 @@
-"""Empaqueta Señal Lab en un único HTML autocontenido (dist/senal-lab.html).
+"""Empaqueta Produciendo Música en un único HTML autocontenido (dist/produciendo-musica.html).
 Uso: python3 build.py   (opcional: --fragment para generar solo el cuerpo, sin <html>/<head>)"""
 import pathlib, re, sys
 root = pathlib.Path(__file__).parent
@@ -13,8 +13,8 @@ if "--fragment" in sys.argv:
     head = re.search(r"<head>(.*)</head>", html, re.S).group(1)
     body = re.search(r"<body>(.*)</body>", html, re.S).group(1)
     head = re.sub(r'<meta charset[^>]*>\s*|<meta name="viewport"[^>]*>\s*', "", head)
-    head = head.replace("<title>Señal Lab</title>", '<title>Señal Lab</title>\n<meta name="claude:viewport-fit-sides" content="cover">')
-    (out / "senal-lab-fragment.html").write_text(head + body, encoding="utf-8")
+    head = head.replace("<title>Produciendo Música</title>", '<title>Produciendo Música</title>\n<meta name="claude:viewport-fit-sides" content="cover">')
+    (out / "produciendo-musica-fragment.html").write_text(head + body, encoding="utf-8")
 else:
-    (out / "senal-lab.html").write_text(html, encoding="utf-8")
+    (out / "produciendo-musica.html").write_text(html, encoding="utf-8")
 print("ok")

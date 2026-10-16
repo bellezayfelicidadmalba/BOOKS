@@ -1,4 +1,4 @@
-/* Señal Lab — figuras interactivas dentro de las lecciones */
+/* Produciendo Música — figuras interactivas dentro de las lecciones */
 window.S = window.S || {};
 (function (S) {
   const W = (S.widgets = {});

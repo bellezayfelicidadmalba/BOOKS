@@ -1,4 +1,4 @@
-/* Señal Lab — contenido editorial.
+/* Produciendo Música — contenido editorial.
    Citas: textuales de los libros (idioma original) con traducción. */
 window.S = window.S || {};
 (function (S) {

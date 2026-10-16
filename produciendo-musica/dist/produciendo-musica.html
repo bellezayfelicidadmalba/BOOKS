@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Señal Lab</title>
+<title>Produciendo Música</title>
 <meta name="description" content="Escuela visual e interactiva de producción musical: lecciones, citas de libros y un laboratorio de audio en el navegador.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -347,12 +347,25 @@ pre.code .s { color: #8fe0b0; }
   main { padding-block: var(--s-5) var(--s-7); }
 }
 
+/* about + disclaimer */
+.about { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: var(--s-6); align-items: start; border-top: 1px solid var(--line); padding-top: var(--s-6); }
+.about h2 { font-family: var(--f-display); font-weight: 800; font-size: 40px; text-transform: uppercase; line-height: .95; margin: 6px 0 var(--s-3); }
+.about-text > p { font-family: var(--f-body); font-size: 18px; line-height: 1.55; max-width: 60ch; margin: 0 0 var(--s-4); }
+.about-books { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.about-books a { display: grid; gap: 2px; padding: 10px 14px; border: 1px solid var(--line); border-left: 6px solid var(--bk); border-radius: 4px; background: var(--panel); text-decoration: none; color: var(--ink); }
+.about-books a:hover { border-color: var(--ink); border-left-color: var(--bk); }
+.about-books b { font-weight: 600; font-size: 15px; }
+.about-books span { font-family: var(--f-mono); font-size: 11.5px; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; }
+p.disclaimer, .about-text > p.disclaimer { font-family: var(--f-ui); font-size: 12.5px; line-height: 1.5; color: var(--muted); max-width: 70ch; margin: 0; padding-left: 10px; border-left: 2px solid var(--line); }
+@media (max-width: 860px) { .about { grid-template-columns: 1fr; gap: var(--s-4); } .about h2 { font-size: 32px; } }
+@media (max-width: 420px) { .brand b { font-size: 20px; } .brand-mark { width: 26px; height: 26px; } .progress-pill { font-size: 10px; padding: 3px 6px; } }
+
 </style>
 </head>
 <body>
-<noscript>Señal Lab necesita JavaScript para generar el audio y las visualizaciones.</noscript>
+<noscript>Produciendo Música necesita JavaScript para generar el audio y las visualizaciones.</noscript>
 <script>
-/* Señal Lab — motor de audio (Web Audio API).
+/* Produciendo Música — motor de audio (Web Audio API).
    Todo se sintetiza en vivo: no hay samples. */
 window.S = window.S || {};
 (function (S) {
@@ -747,7 +760,7 @@ window.S = window.S || {};
 
 </script>
 <script>
-/* Señal Lab — dibujo en canvas + controles de UI */
+/* Produciendo Música — dibujo en canvas + controles de UI */
 window.S = window.S || {};
 (function (S) {
   const V = (S.viz = {});
@@ -971,7 +984,7 @@ window.S = window.S || {};
 
 </script>
 <script>
-/* Señal Lab — contenido editorial.
+/* Produciendo Música — contenido editorial.
    Citas: textuales de los libros (idioma original) con traducción. */
 window.S = window.S || {};
 (function (S) {
@@ -1412,7 +1425,7 @@ window.S = window.S || {};
 
 </script>
 <script>
-/* Señal Lab — Labs: Beat, Mezcla 3D, Arreglo */
+/* Produciendo Música — Labs: Beat, Mezcla 3D, Arreglo */
 window.S = window.S || {};
 (function (S) {
   const L = (S.labs = S.labs || {});
@@ -1446,7 +1459,7 @@ window.S = window.S || {};
     for (let bar = 0; bar < 4; bar++) for (let i = 0; i < 16; i++) bassNotes.push(pattern.bass[i] ? roots[bar] : "Rest()");
     const on = (k) => !mutes[k] && pattern[k] && pattern[k].some((v) => v);
     let s = "";
-    s += "// Señal Lab: patrón exportado a SuperCollider\n";
+    s += "// Produciendo Música: patrón exportado a SuperCollider\n";
     s += "// 1) Evaluá el primer bloque (Cmd/Ctrl+Enter) 2) Evaluá el segundo para tocar\n(\n";
     s += "TempoClock.default.tempo = " + bpm + " / 60;\n\n";
     s += "SynthDef(\\kick, { |out = 0, amp = 0.9|\n  var env = EnvGen.ar(Env.perc(0.004, 0.45), doneAction: 2);\n  var freq = EnvGen.ar(Env([160, 48, 40], [0.11, 0.3], \\exp));\n  Out.ar(out, (SinOsc.ar(freq) * env * amp) ! 2);\n}).add;\n\n";
@@ -1933,7 +1946,7 @@ window.S = window.S || {};
 
 </script>
 <script>
-/* Señal Lab — Labs: EQ, Compresor, Mastering, Oído, Síntesis */
+/* Produciendo Música — Labs: EQ, Compresor, Mastering, Oído, Síntesis */
 window.S = window.S || {};
 (function (S) {
   const L = (S.labs = S.labs || {});
@@ -2450,7 +2463,7 @@ window.S = window.S || {};
     const osc = (o) => SC_WAVE[o.wave] + "(freq" + (vib ? " * vib" : "") + " * " + f(Math.pow(2, o.oct + o.detune / 1200)) + (o.wave === "square" ? ", 0.5" : "") + ") * " + f(o.level);
     const flt = p.filter.type === "lowpass" ? "RLPF" : p.filter.type === "highpass" ? "RHPF" : "BPF";
     const L = [];
-    L.push("// Señal Lab: \"" + p.name + "\" como SynthDef de SuperCollider");
+    L.push("// Produciendo Música: \"" + p.name + "\" como SynthDef de SuperCollider");
     L.push("(");
     L.push("SynthDef(\\senal, { |out = 0, freq = 220, gate = 1, amp = 0.3|");
     L.push("  var lfo = SinOsc.kr(" + f(p.lfo.rate) + ");");
@@ -2600,7 +2613,7 @@ window.S = window.S || {};
 
 </script>
 <script>
-/* Señal Lab — figuras interactivas dentro de las lecciones */
+/* Produciendo Música — figuras interactivas dentro de las lecciones */
 window.S = window.S || {};
 (function (S) {
   const W = (S.widgets = {});
@@ -3215,7 +3228,7 @@ window.S = window.S || {};
 
 </script>
 <script>
-/* Señal Lab — router y páginas */
+/* Produciendo Música — router y páginas */
 window.S = window.S || {};
 (function (S) {
   const { el } = S.ui, U = S.ui, A = S.audio, V = S.viz, C = S.content, L = S.labs, W = S.widgets;
@@ -3255,11 +3268,11 @@ window.S = window.S || {};
     r.dataset.theme = dark ? "light" : "dark"; U.store.set("theme", r.dataset.theme); route();
   });
   const savedTheme = U.store.get("theme", null); if (savedTheme) document.documentElement.dataset.theme = savedTheme;
-  const brand = el("a", { class: "brand", href: "#", html: '<svg class="brand-mark" viewBox="0 0 30 30" aria-hidden="true"><rect width="30" height="30" rx="6" fill="var(--ink)"/><path d="M4 15h4l2-7 3 14 3-18 3 16 2-5h5" fill="none" stroke="var(--bg)" stroke-width="2" stroke-linejoin="round"/></svg><span style="display:grid"><b>Señal</b><small>Escuela de producción</small></span>' });
+  const brand = el("a", { class: "brand", href: "#", html: '<svg class="brand-mark" viewBox="0 0 30 30" aria-hidden="true"><rect width="30" height="30" rx="6" fill="var(--ink)"/><path d="M4 15h4l2-7 3 14 3-18 3 16 2-5h5" fill="none" stroke="var(--bg)" stroke-width="2" stroke-linejoin="round"/></svg><span style="display:grid"><b>Produciendo Música</b><small>Escuela de producción</small></span>' });
   const header = el("header", { class: "topbar" }, el("div", { class: "wrap" }, brand, el("nav", { class: "nav", "aria-label": "Secciones" }, navLinks), progPill, themeBtn));
   const main = el("main", { id: "main" });
   const footer = el("footer", { class: "footer" }, el("div", { class: "wrap" },
-    el("span", null, "Señal Lab · Todo el audio se sintetiza en vivo con Web Audio. Citas breves con fines educativos; los derechos son de sus autores."),
+    el("span", null, "Produciendo Música · Hecho con IA a partir de cinco libros de producción, con fines educativos. Todo el audio se sintetiza en vivo en tu navegador."),
     el("span", null, "Basado en Burgess, Swindali, Rogers y Timothy · ", el("a", { href: "#biblioteca" }, "ver biblioteca"))));
   document.body.append(header, main, footer);
   paintProgress();
@@ -3270,7 +3283,7 @@ window.S = window.S || {};
   P.home = (root) => {
     const cv = el("canvas");
     let g = null, an = null;
-    const playBtn = U.playBtn("Escuchar la señal", (on) => {
+    const playBtn = U.playBtn("Escuchar un groove", (on) => {
       if (!g) { g = A.track(new A.Groove({ bpm: 124, lead: true })); g.pattern = L.patternFrom(L.GENRES[1]); g.mutes = {}; an = V.mkAnalyser(2048, 0.8); g.connect(an).connect(A.master); }
       on ? g.start() : g.stop();
     });
@@ -3308,11 +3321,22 @@ window.S = window.S || {};
       x.globalAlpha = 1;
     });
 
+    root.append(aboutBlock());
     root.append(el("div", { class: "sec-head" }, el("h2", null, "Lecciones"), el("a", { href: "#lecciones", class: "eyebrow" }, "Ver el programa →")), moduleGrid());
     root.append(el("div", { class: "sec-head" }, el("h2", null, "Laboratorio"), el("a", { href: "#lab", class: "eyebrow" }, "Todos los labs →")), labGrid());
     const ids = ["h_wins", "b_museum", "r_loudplay"];
     root.append(el("div", { class: "sec-head" }, el("h2", null, "Del libro"), el("a", { href: "#biblioteca", class: "eyebrow" }, "86 citas de 5 libros →")), el("div", { class: "quote-grid" }, ids.map((i) => quoteEl(i, true))));
   };
+
+  // what this is, where the lessons come from, and the AI disclaimer
+  const DISCLAIMER = "Contenido elaborado con inteligencia artificial (Claude, de Anthropic) a partir de esos libros, con fines exclusivamente educativos. Puede contener errores o simplificaciones: no reemplaza la lectura de los libros originales. Las citas son breves y sus derechos pertenecen a los autores y editoriales.";
+  const aboutBlock = () => el("section", { class: "about", "aria-labelledby": "about-h" },
+    el("div", { class: "about-text" },
+      el("div", { class: "eyebrow" }, "Sobre este proyecto"),
+      el("h2", { id: "about-h" }, "Lecciones armadas con cinco libros de producción"),
+      el("p", null, "Cada lección de Produciendo Música se escribió leyendo estos libros: sus ideas, sus cifras y sus casos prácticos están reorganizados en un recorrido corto y visual. Cuando un dato sale de un libro, se nombra al autor; cuando es una cita, aparece en el idioma original con su traducción. Los laboratorios sirven para escuchar y ver lo que los libros explican con palabras."),
+      el("p", { class: "disclaimer" }, DISCLAIMER)),
+    el("ul", { class: "about-books" }, Object.values(C.BOOKS).map((b) => el("li", { style: { "--bk": b.color } }, el("a", { href: "#biblioteca" }, el("b", null, b.title), el("span", null, b.author))))));
 
   const moduleGrid = () => el("div", { class: "modules" }, C.LESSONS.map((l) => {
     const cv = el("canvas", { class: "wave" });
@@ -3443,7 +3467,7 @@ window.S = window.S || {};
       grid.replaceChildren(...(list.length ? list.map(([id]) => quoteEl(id)) : [el("p", null, "No hay citas con \"" + term + "\". Probá con otra palabra.")]));
     };
     paint();
-    root.append(covers, about, el("div", { class: "filter-row" }, search), grid);
+    root.append(covers, about, el("div", { class: "filter-row" }, search), grid, el("p", { class: "disclaimer", style: { marginTop: "32px" } }, DISCLAIMER));
   };
 
   P.glossary = (root) => {
@@ -3473,7 +3497,7 @@ window.S = window.S || {};
     else P.notFound(root);
     navLinks.forEach((a, i) => a.setAttribute("aria-current", NAV[i][0] === nav ? "page" : "false"));
     window.scrollTo(0, 0);
-    document.title = "Señal Lab";
+    document.title = "Produciendo Música";
   };
   window.addEventListener("hashchange", route);
   matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => { if (!document.documentElement.dataset.theme) route(); });

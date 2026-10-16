@@ -1,13 +1,13 @@
-# Señal Lab — escuela visual de producción musical
+# Produciendo Música — escuela visual de producción musical
 
 Una web app para aprender producción musical: **7 lecciones**, **8 laboratorios interactivos**, **86 citas** de libros y un glosario. Todo el audio se sintetiza en vivo con Web Audio: no hay samples, no hay backend, no hay build obligatorio.
 
 ## Cómo abrirla
 
 - **Online (GitHub Pages):** en el repo, *Settings → Pages → Deploy from a branch → `main` / `/ (root)`*. La app queda en
-  `https://<usuario>.github.io/<repo>/senal-lab/`
-- **Local:** `cd senal-lab && python3 -m http.server` y abrí `http://localhost:8000`.
-- **Un solo archivo:** `python3 build.py` genera `dist/senal-lab.html`, que se puede mandar por mail o abrir con doble clic.
+  `https://<usuario>.github.io/<repo>/produciendo-musica/`
+- **Local:** `cd produciendo-musica && python3 -m http.server` y abrí `http://localhost:8000`.
+- **Un solo archivo:** `python3 build.py` genera `dist/produciendo-musica.html`, que se puede mandar por mail o abrir con doble clic.
 
 ## Qué hay adentro
 
@@ -37,7 +37,7 @@ Las citas son breves y se usan con fines educativos; los derechos pertenecen a s
 ## Estructura
 
 ```
-senal-lab/
+produciendo-musica/
   index.html
   css/app.css
   js/audio.js     motor de audio: voces de batería, groove, sintetizador

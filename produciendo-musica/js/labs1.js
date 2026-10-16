@@ -1,4 +1,4 @@
-/* Señal Lab — Labs: Beat, Mezcla 3D, Arreglo */
+/* Produciendo Música — Labs: Beat, Mezcla 3D, Arreglo */
 window.S = window.S || {};
 (function (S) {
   const L = (S.labs = S.labs || {});
@@ -32,7 +32,7 @@ window.S = window.S || {};
     for (let bar = 0; bar < 4; bar++) for (let i = 0; i < 16; i++) bassNotes.push(pattern.bass[i] ? roots[bar] : "Rest()");
     const on = (k) => !mutes[k] && pattern[k] && pattern[k].some((v) => v);
     let s = "";
-    s += "// Señal Lab: patrón exportado a SuperCollider\n";
+    s += "// Produciendo Música: patrón exportado a SuperCollider\n";
     s += "// 1) Evaluá el primer bloque (Cmd/Ctrl+Enter) 2) Evaluá el segundo para tocar\n(\n";
     s += "TempoClock.default.tempo = " + bpm + " / 60;\n\n";
     s += "SynthDef(\\kick, { |out = 0, amp = 0.9|\n  var env = EnvGen.ar(Env.perc(0.004, 0.45), doneAction: 2);\n  var freq = EnvGen.ar(Env([160, 48, 40], [0.11, 0.3], \\exp));\n  Out.ar(out, (SinOsc.ar(freq) * env * amp) ! 2);\n}).add;\n\n";

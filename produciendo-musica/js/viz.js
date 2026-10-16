@@ -1,4 +1,4 @@
-/* Señal Lab — dibujo en canvas + controles de UI */
+/* Produciendo Música — dibujo en canvas + controles de UI */
 window.S = window.S || {};
 (function (S) {
   const V = (S.viz = {});

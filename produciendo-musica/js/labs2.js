@@ -1,4 +1,4 @@
-/* Señal Lab — Labs: EQ, Compresor, Mastering, Oído, Síntesis */
+/* Produciendo Música — Labs: EQ, Compresor, Mastering, Oído, Síntesis */
 window.S = window.S || {};
 (function (S) {
   const L = (S.labs = S.labs || {});
@@ -515,7 +515,7 @@ window.S = window.S || {};
     const osc = (o) => SC_WAVE[o.wave] + "(freq" + (vib ? " * vib" : "") + " * " + f(Math.pow(2, o.oct + o.detune / 1200)) + (o.wave === "square" ? ", 0.5" : "") + ") * " + f(o.level);
     const flt = p.filter.type === "lowpass" ? "RLPF" : p.filter.type === "highpass" ? "RHPF" : "BPF";
     const L = [];
-    L.push("// Señal Lab: \"" + p.name + "\" como SynthDef de SuperCollider");
+    L.push("// Produciendo Música: \"" + p.name + "\" como SynthDef de SuperCollider");
     L.push("(");
     L.push("SynthDef(\\senal, { |out = 0, freq = 220, gate = 1, amp = 0.3|");
     L.push("  var lfo = SinOsc.kr(" + f(p.lfo.rate) + ");");

@@ -1,4 +1,4 @@
-/* Señal Lab — router y páginas */
+/* Produciendo Música — router y páginas */
 window.S = window.S || {};
 (function (S) {
   const { el } = S.ui, U = S.ui, A = S.audio, V = S.viz, C = S.content, L = S.labs, W = S.widgets;
@@ -38,11 +38,11 @@ window.S = window.S || {};
     r.dataset.theme = dark ? "light" : "dark"; U.store.set("theme", r.dataset.theme); route();
   });
   const savedTheme = U.store.get("theme", null); if (savedTheme) document.documentElement.dataset.theme = savedTheme;
-  const brand = el("a", { class: "brand", href: "#", html: '<svg class="brand-mark" viewBox="0 0 30 30" aria-hidden="true"><rect width="30" height="30" rx="6" fill="var(--ink)"/><path d="M4 15h4l2-7 3 14 3-18 3 16 2-5h5" fill="none" stroke="var(--bg)" stroke-width="2" stroke-linejoin="round"/></svg><span style="display:grid"><b>Señal</b><small>Escuela de producción</small></span>' });
+  const brand = el("a", { class: "brand", href: "#", html: '<svg class="brand-mark" viewBox="0 0 30 30" aria-hidden="true"><rect width="30" height="30" rx="6" fill="var(--ink)"/><path d="M4 15h4l2-7 3 14 3-18 3 16 2-5h5" fill="none" stroke="var(--bg)" stroke-width="2" stroke-linejoin="round"/></svg><span style="display:grid"><b>Produciendo Música</b><small>Escuela de producción</small></span>' });
   const header = el("header", { class: "topbar" }, el("div", { class: "wrap" }, brand, el("nav", { class: "nav", "aria-label": "Secciones" }, navLinks), progPill, themeBtn));
   const main = el("main", { id: "main" });
   const footer = el("footer", { class: "footer" }, el("div", { class: "wrap" },
-    el("span", null, "Señal Lab · Todo el audio se sintetiza en vivo con Web Audio. Citas breves con fines educativos; los derechos son de sus autores."),
+    el("span", null, "Produciendo Música · Hecho con IA a partir de cinco libros de producción, con fines educativos. Todo el audio se sintetiza en vivo en tu navegador."),
     el("span", null, "Basado en Burgess, Swindali, Rogers y Timothy · ", el("a", { href: "#biblioteca" }, "ver biblioteca"))));
   document.body.append(header, main, footer);
   paintProgress();
@@ -53,7 +53,7 @@ window.S = window.S || {};
   P.home = (root) => {
     const cv = el("canvas");
     let g = null, an = null;
-    const playBtn = U.playBtn("Escuchar la señal", (on) => {
+    const playBtn = U.playBtn("Escuchar un groove", (on) => {
       if (!g) { g = A.track(new A.Groove({ bpm: 124, lead: true })); g.pattern = L.patternFrom(L.GENRES[1]); g.mutes = {}; an = V.mkAnalyser(2048, 0.8); g.connect(an).connect(A.master); }
       on ? g.start() : g.stop();
     });
@@ -91,11 +91,22 @@ window.S = window.S || {};
       x.globalAlpha = 1;
     });
 
+    root.append(aboutBlock());
     root.append(el("div", { class: "sec-head" }, el("h2", null, "Lecciones"), el("a", { href: "#lecciones", class: "eyebrow" }, "Ver el programa →")), moduleGrid());
     root.append(el("div", { class: "sec-head" }, el("h2", null, "Laboratorio"), el("a", { href: "#lab", class: "eyebrow" }, "Todos los labs →")), labGrid());
     const ids = ["h_wins", "b_museum", "r_loudplay"];
     root.append(el("div", { class: "sec-head" }, el("h2", null, "Del libro"), el("a", { href: "#biblioteca", class: "eyebrow" }, "86 citas de 5 libros →")), el("div", { class: "quote-grid" }, ids.map((i) => quoteEl(i, true))));
   };
+
+  // what this is, where the lessons come from, and the AI disclaimer
+  const DISCLAIMER = "Contenido elaborado con inteligencia artificial (Claude, de Anthropic) a partir de esos libros, con fines exclusivamente educativos. Puede contener errores o simplificaciones: no reemplaza la lectura de los libros originales. Las citas son breves y sus derechos pertenecen a los autores y editoriales.";
+  const aboutBlock = () => el("section", { class: "about", "aria-labelledby": "about-h" },
+    el("div", { class: "about-text" },
+      el("div", { class: "eyebrow" }, "Sobre este proyecto"),
+      el("h2", { id: "about-h" }, "Lecciones armadas con cinco libros de producción"),
+      el("p", null, "Cada lección de Produciendo Música se escribió leyendo estos libros: sus ideas, sus cifras y sus casos prácticos están reorganizados en un recorrido corto y visual. Cuando un dato sale de un libro, se nombra al autor; cuando es una cita, aparece en el idioma original con su traducción. Los laboratorios sirven para escuchar y ver lo que los libros explican con palabras."),
+      el("p", { class: "disclaimer" }, DISCLAIMER)),
+    el("ul", { class: "about-books" }, Object.values(C.BOOKS).map((b) => el("li", { style: { "--bk": b.color } }, el("a", { href: "#biblioteca" }, el("b", null, b.title), el("span", null, b.author))))));
 
   const moduleGrid = () => el("div", { class: "modules" }, C.LESSONS.map((l) => {
     const cv = el("canvas", { class: "wave" });
@@ -226,7 +237,7 @@ window.S = window.S || {};
       grid.replaceChildren(...(list.length ? list.map(([id]) => quoteEl(id)) : [el("p", null, "No hay citas con \"" + term + "\". Probá con otra palabra.")]));
     };
     paint();
-    root.append(covers, about, el("div", { class: "filter-row" }, search), grid);
+    root.append(covers, about, el("div", { class: "filter-row" }, search), grid, el("p", { class: "disclaimer", style: { marginTop: "32px" } }, DISCLAIMER));
   };
 
   P.glossary = (root) => {
@@ -256,7 +267,7 @@ window.S = window.S || {};
     else P.notFound(root);
     navLinks.forEach((a, i) => a.setAttribute("aria-current", NAV[i][0] === nav ? "page" : "false"));
     window.scrollTo(0, 0);
-    document.title = "Señal Lab";
+    document.title = "Produciendo Música";
   };
   window.addEventListener("hashchange", route);
   matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => { if (!document.documentElement.dataset.theme) route(); });

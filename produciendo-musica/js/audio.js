@@ -1,4 +1,4 @@
-/* Señal Lab — motor de audio (Web Audio API).
+/* Produciendo Música — motor de audio (Web Audio API).
    Todo se sintetiza en vivo: no hay samples. */
 window.S = window.S || {};
 (function (S) {
